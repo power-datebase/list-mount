@@ -1,7 +1,7 @@
 --[[
-    MOUNT TRANGGULASIH EXECUTOR (UPDATED)
-    • Update: Nama UI menjadi Mount Tranggulasih
-    • Update: Koordinat Checkpoint 1-21 (Submit)
+    MOUNT TRANGGULASIH EXECUTOR (UPDATED v2)
+    • Update: Koordinat Checkpoint 1-20 (Revisi)
+    • Update: Penambahan titik Submit (21) & Reset CP (22)
 ]]
 
 local Players = game:GetService("Players")
@@ -12,29 +12,30 @@ local RunService = game:GetService("RunService")
 
 local LocalPlayer = Players.LocalPlayer
 
--- === CHECKPOINT DATA (UPDATED: MOUNT TRANGGULASIH) ===
+-- === CHECKPOINT DATA (UPDATED: MOUNT TRANGGULASIH v2) ===
 local checkpoints = {
-    {name = "Checkpoint 1",  pos = Vector3.new(-426, -199, 2069)},
-    {name = "Checkpoint 2",  pos = Vector3.new(-128, -168, 1879)},
-    {name = "Checkpoint 3",  pos = Vector3.new(209, -169, 1828)},
-    {name = "Checkpoint 4",  pos = Vector3.new(183, -84, 1746)},
-    {name = "Checkpoint 5",  pos = Vector3.new(357, -96, 1685)},
-    {name = "Checkpoint 6",  pos = Vector3.new(350, -144, 1354)},
-    {name = "Checkpoint 7",  pos = Vector3.new(463, -56, 1156)},
-    {name = "Checkpoint 8",  pos = Vector3.new(247, 36, 1013)},
-    {name = "Checkpoint 9",  pos = Vector3.new(323, 8, 1258)},
-    {name = "Checkpoint 10", pos = Vector3.new(118, -8, 1548)},
-    {name = "Checkpoint 11", pos = Vector3.new(-497, -64, 1744)},
-    {name = "Checkpoint 12", pos = Vector3.new(-214, 20, 1022)},
-    {name = "Checkpoint 13", pos = Vector3.new(-631, 51, 965)},
-    {name = "Checkpoint 14", pos = Vector3.new(-376, 192, 880)},
-    {name = "Checkpoint 15", pos = Vector3.new(-283, 192, 603)},
-    {name = "Checkpoint 16", pos = Vector3.new(99, 236, 732)},
-    {name = "Checkpoint 17", pos = Vector3.new(89, 244, 363)},
-    {name = "Checkpoint 18", pos = Vector3.new(-347, 318, 509)},
-    {name = "Checkpoint 19", pos = Vector3.new(-394, 384, 240)},
-    {name = "Checkpoint 20", pos = Vector3.new(-321, 464, 92)},
-    {name = "Submit 21",     pos = Vector3.new(-16, 330, -295)}
+    {name = "Checkpoint 1",  pos = Vector3.new(-425, -199, 2071)},
+    {name = "Checkpoint 2",  pos = Vector3.new(-128, -171, 1879)},
+    {name = "Checkpoint 3",  pos = Vector3.new(209, -172, 1828)},
+    {name = "Checkpoint 4",  pos = Vector3.new(181, -87, 1746)},
+    {name = "Checkpoint 5",  pos = Vector3.new(358, -99, 1685)},
+    {name = "Checkpoint 6",  pos = Vector3.new(349, -143, 1354)},
+    {name = "Checkpoint 7",  pos = Vector3.new(462, -59, 1156)},
+    {name = "Checkpoint 8",  pos = Vector3.new(246, 33, 1013)},
+    {name = "Checkpoint 9",  pos = Vector3.new(324, 5, 1259)},
+    {name = "Checkpoint 10", pos = Vector3.new(118, -11, 1548)},
+    {name = "Checkpoint 11", pos = Vector3.new(-497, -67, 1744)},
+    {name = "Checkpoint 12", pos = Vector3.new(-223, 17, 1032)},
+    {name = "Checkpoint 13", pos = Vector3.new(-634, 49, 969)},
+    {name = "Checkpoint 14", pos = Vector3.new(-376, 189, 880)},
+    {name = "Checkpoint 15", pos = Vector3.new(-283, 190, 603)},
+    {name = "Checkpoint 16", pos = Vector3.new(100, 233, 732)},
+    {name = "Checkpoint 17", pos = Vector3.new(89, 241, 363)},
+    {name = "Checkpoint 18", pos = Vector3.new(-347, 315, 509)},
+    {name = "Checkpoint 19", pos = Vector3.new(-395, 381, 240)},
+    {name = "Checkpoint 20", pos = Vector3.new(-323, 461, 93)},
+    {name = "Submit",        pos = Vector3.new(-18, 332, -256)},
+    {name = "Reset CP",      pos = Vector3.new(14, 335, -269)}
 }
 
 local currentStep = 1
@@ -599,20 +600,5 @@ Header.InputBegan:Connect(function(input)
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
                 dragging = false
-            end
-        end)
-    end
-end)
-
-Header.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        local delta = input.Position - dragStart
-        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
+                    end
+                    
