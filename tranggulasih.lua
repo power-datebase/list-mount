@@ -1,7 +1,8 @@
 --[[
-    MOUNT TRANGGULASIH EXECUTOR (UPDATED v2)
-    • Update: Koordinat Checkpoint 1-20 (Revisi)
-    • Update: Penambahan titik Submit (21) & Reset CP (22)
+    MOUNT TRANGGULASIH EXECUTOR (UPDATED v3)
+    • Update: Koordinat Checkpoint 1-20 (Fixed)
+    • Update: Submit (21)
+    • Update: Reset CP (22) -> Digeser Naik 3 & Kanan 2
 ]]
 
 local Players = game:GetService("Players")
@@ -12,7 +13,7 @@ local RunService = game:GetService("RunService")
 
 local LocalPlayer = Players.LocalPlayer
 
--- === CHECKPOINT DATA (UPDATED: MOUNT TRANGGULASIH v2) ===
+-- === CHECKPOINT DATA (UPDATED: MOUNT TRANGGULASIH v3) ===
 local checkpoints = {
     {name = "Checkpoint 1",  pos = Vector3.new(-425, -199, 2071)},
     {name = "Checkpoint 2",  pos = Vector3.new(-128, -171, 1879)},
@@ -35,7 +36,7 @@ local checkpoints = {
     {name = "Checkpoint 19", pos = Vector3.new(-395, 381, 240)},
     {name = "Checkpoint 20", pos = Vector3.new(-323, 461, 93)},
     {name = "Submit",        pos = Vector3.new(-18, 332, -256)},
-    {name = "Reset CP",      pos = Vector3.new(14, 335, -269)}
+    {name = "Reset CP",      pos = Vector3.new(16, 338, -269)} -- Updated Here
 }
 
 local currentStep = 1
@@ -600,5 +601,20 @@ Header.InputBegan:Connect(function(input)
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
                 dragging = false
-                    end
-                    
+            end
+        end)
+    end
+end)
+
+Header.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
